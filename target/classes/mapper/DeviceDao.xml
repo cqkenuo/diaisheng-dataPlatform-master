@@ -13,4 +13,9 @@
     <select id="getAllDevice" resultType="com.qdu.diaisheng.entity.Device">
         select*from device;
     </select>
+
+     <!-- 根据userName查询设备   -->
+    <select id="getDeviceByName" resultType="com.qdu.diaisheng.entity.Device">
+          select*from device where device_id in(select device_id from user where user_name=#{userName})
+    </select>
 </mapper>

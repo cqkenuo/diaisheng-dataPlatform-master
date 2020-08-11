@@ -5,6 +5,7 @@ import com.qdu.diaisheng.entity.Camera;
 import com.qdu.diaisheng.entity.Photo;
 import com.qdu.diaisheng.entity.Result;
 import com.qdu.diaisheng.service.PhotoService;
+import com.qdu.diaisheng.task.CompratorByLastModified;
 import com.qdu.diaisheng.util.Md5;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -23,6 +24,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.text.SimpleDateFormat;
@@ -241,7 +244,7 @@ public class PhotoManageController {
 
     @RequestMapping(value = "/getnewphoto")
     @ResponseBody
-    public Map<String, Object> getNewPhoto(String deviceId) {
+    public Map<String, Object> getNewPhoto(String deviceId) throws IOException {
         Map<String, Object> map = new HashMap<String, Object>();
         if (deviceId==null||"".equals(deviceId)){
             map.put("err", 1);
@@ -249,23 +252,23 @@ public class PhotoManageController {
             return map;
         }
         //String camerId = "c844150007b9";
-        Camera camera = photoService.getCameraBydeviceId(deviceId);
+       /* Camera camera = photoService.getCameraBydeviceId(deviceId);
         if (camera == null) {
             map.put("err", 1);
             map.put("errMag", "未查到图片");
             return map;
-        }
-        Photo p = photoService.getNewPhoto(camera.getCameraId());
+        }*/
+        //Photo p = photoService.getNewPhoto(camera.getCameraId());
+        Photo p = photoService.getNewPhoto("diaisheng");//此处先写死
         if (p == null) {
             map.put("err", 1);
             map.put("errMag", "未查到图片");
         } else {
-            map.put("picBase64", p.getContent());
+            //map.put("picBase64", p.getContent());
+            map.put("photoPath", p.getPath());
             map.put("err", 0);
         }
         return map;
-
-
     }
 
     @RequestMapping(value = "/getnewphototest")
@@ -425,4 +428,7 @@ public class PhotoManageController {
        }
         return result;
     }
+
+
+
 }

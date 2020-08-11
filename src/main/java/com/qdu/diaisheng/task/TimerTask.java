@@ -26,11 +26,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
-@EnableScheduling
-@EnableAsync
+//@Component
+//@EnableScheduling
+//@EnableAsync
 public class TimerTask {
-    public static int PORT=20001;
+   /* public static int PORT=20001;
     private Logger logger = Logger.getLogger(this.getClass());
     @Autowired
     private PhotoService photoService;
@@ -48,10 +48,10 @@ public class TimerTask {
         serverSocket.setReuseAddress(true);
         serverSocket.setReceiveBufferSize(6*1024*1024);
         serverSocket.setPerformancePreferences(2,2,1);
-    }
-    @Async
-    @Scheduled(cron = "0 */5 * * * ?")
-    public void queryDatasFromDtu(){
+    }*/
+   // @Async
+   // @Scheduled(cron = "0 */5 * * * ?")
+    /*public void queryDatasFromDtu(){
         try{
             serverSocket=new ServerSocket();//给云服务器制定端口，初始化
             //logger.info("监听端口成功...");
@@ -66,7 +66,7 @@ public class TimerTask {
         }catch (Exception e){
             logger.error("spring定时任务出错！",e);
         }
-    }
+    }*/
     /**
      * @Author wangxi
      * @Description 定时执行任务，每半小时从接口获取图片的Base64编码并存入数据库中
@@ -74,9 +74,9 @@ public class TimerTask {
      * @Param [request, response]
      * @return
      **/
-    @Async
-    @Scheduled(cron = "0 */30 * * * ?")
-    public void timerAddPhoto(){
+    //@Async
+    //@Scheduled(cron = "0 */30 * * * ?")
+    /*public void timerAddPhoto(){
         String url="http://39.108.213.89:10100/GetSnapshotPic";
         Map<String,Object> map=new HashMap<>();
         CloseableHttpClient client=null;
@@ -125,7 +125,7 @@ public class TimerTask {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
 
 }

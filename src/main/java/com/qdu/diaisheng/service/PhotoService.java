@@ -4,6 +4,7 @@ import com.qdu.diaisheng.entity.Camera;
 import com.qdu.diaisheng.entity.Photo;
 import org.apache.ibatis.annotations.Param;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface PhotoService {

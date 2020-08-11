@@ -61,8 +61,10 @@ public class DataValueManagementController {
      */
     @RequestMapping(value = "/getdata")
     @ResponseBody
-    public PageInfo getData(HttpServletRequest request, Integer page, Integer limit){
-       PageInfo pageInfo = new PageInfo();
+    public PageInfo getData(HttpServletRequest request){
+        //Integer page, Integer limit
+        PageInfo pageInfo = new PageInfo();
+        //Map<String,Object> modelMap = new HashMap<>();
         List<DataValue> list = new ArrayList<>();
         String deviceId=request.getParameter("deviceId");
         if(deviceId!=null){
@@ -77,7 +79,7 @@ public class DataValueManagementController {
                     pageInfo.setData(dve.getDataValueList());
                     pageInfo.setCode(0);
                     //pageInfo.setCount(total);
-                    pageInfo.setMsg("查询数据点信息成功");
+                   pageInfo.setMsg("查询数据点信息成功");
                     //modelMap.put("success",true);
                 }else{
                     //modelMap.put("success",false);
@@ -86,9 +88,12 @@ public class DataValueManagementController {
             }catch (Exception e){
                 logger.error("查询数据点信息失败！",e);
                 pageInfo.setMsg("查询数据点信息失败");
+                //modelMap.put("success",false);
             }
         }else {
             logger.error("查询数据点信息失败！");
+            //modelMap.put("success",false);
+            pageInfo.setMsg("查询数据点信息失败");
 
         }
         //Map<String,Object>modelMap=new HashMap<>();

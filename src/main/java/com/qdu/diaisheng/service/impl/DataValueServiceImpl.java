@@ -85,9 +85,11 @@ public class DataValueServiceImpl implements DataValueService {
         DataValueExecution dve=new DataValueExecution();
         List<DataPoint> dataPointList=dataPointDao.getDataPointbyDevice(deviceId);
 
-        List<String>ds=new ArrayList<>();
+        List<String> ds = new ArrayList<>();
         if(dataPointList!=null){
             for(DataPoint dataPoint:dataPointList){
+                String pointId = dataPoint.getDataPointId();
+                if (pointId.equals("41607")||pointId.equals("41608")||pointId.equals("41610"))continue;
                 ds.add(dataPoint.getDataPointId());
             }
             dataValueList=dataValueDao.getnowdate(ds);

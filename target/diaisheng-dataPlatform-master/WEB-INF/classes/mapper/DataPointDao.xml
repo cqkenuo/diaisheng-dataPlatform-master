@@ -19,17 +19,15 @@
             <result column="data_model_name" property="dataModelName"/>
         </association>
     </resultMap>
-
-
     <select id="queryDataPointListByDataModel" parameterType="Integer" resultType="com.qdu.diaisheng.entity.DataPoint">
-        select data_point_id,data_point_name from data_point where data_model_id=#{dataModelId} order by data_point_id asc
+        select data_point_id,data_point_name, data_point_register,data_type,power,last_edit_time from data_point where data_model_id=#{dataModelId};
     </select>
     <select id="getPointNameByPointId" resultType="String">
         select data_point_name from data_point where data_point_id=#{dataPointId}
     </select>
 
     <select id="getDataPointbyDevice" resultMap="dataPointMap">
-        select*from data_point p,data_model m where p.data_model_id=m.data_model_id and m.device_id=#{deviceId} order by m.data_model_id asc
+        select*from data_point p,data_model m where p.data_model_id=m.data_model_id and m.device_id=#{deviceId};
     </select>
 
     <update id="updateDataPoint" >
@@ -60,7 +58,4 @@
         where data_point_id=#{dataPointId}
     </update>
 
-    <select id="getDataPointCount" resultType="Integer">
-        select count(*)from data_point where data_model_id in(select data_model_id from data_model where device_id= #{deviceId})
-    </select>
 </mapper>

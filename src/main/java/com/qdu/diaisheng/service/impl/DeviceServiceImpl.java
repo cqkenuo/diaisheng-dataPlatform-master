@@ -7,6 +7,7 @@ import com.qdu.diaisheng.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.naming.Name;
 import java.util.List;
 
 @Service
@@ -20,6 +21,17 @@ public class DeviceServiceImpl implements DeviceService {
             return deviceDao.getAllDevice();
         }else{
             return deviceDao.queryDevice(user.getUserId());
+        }
+
+    }
+
+    @Override
+    public List<Device> getDeviceListByName(String userName) {
+
+        if(userName.equals("admin")){
+            return deviceDao.getAllDevice();
+        }else{
+            return deviceDao.getDeviceByName(userName);
         }
 
     }

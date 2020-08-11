@@ -7,5 +7,7 @@ import java.util.List;
 public interface DeviceService {
     List<Device> getDeviceList(User user);
 
+    List<Device> getDeviceListByName(String userName);
+
 
 }

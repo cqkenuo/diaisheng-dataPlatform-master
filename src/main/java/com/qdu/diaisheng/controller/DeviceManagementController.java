@@ -84,7 +84,7 @@ public class DeviceManagementController {
      */
     @RequestMapping(value = "/getdevice",method = RequestMethod.GET)
     @ResponseBody
-    public Map<String,Object>getDevice(HttpServletRequest request){
+    public Map<String,Object> getDevice(HttpServletRequest request){
 
         User user=(User) request.getSession().getAttribute("loginUser");
         Map<String,Object>modelMap=new HashMap<>();
@@ -108,7 +108,40 @@ public class DeviceManagementController {
         return modelMap;
     }
 
+    /**
+     * @author changliang
+     * @Description 根据user_id获取设备
+     * 通过modelMap返回数据
+     * @date  2019/8/4
+     * @return Map
+     * @throws
+     * @since
+     */
+    @RequestMapping(value = "/getDeviceWechat",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> getDeviceWechat(String userName){
 
+       // User user=(User) request.getSession().getAttribute("loginUser");
+        Map<String,Object>modelMap=new HashMap<>();
+        if(userName==null){
+            modelMap.put("success",false);
+            modelMap.put("redirect","/diaisheng/admin/login");
+            return modelMap;
+        }else{
+            List<Device> deviceList=deviceService.getDeviceListByName(userName);
+            if(deviceList!=null&&deviceList.size()>0){
+                modelMap.put("success",true);
+                modelMap.put("device",deviceList);
+            }else{
+                modelMap.put("success",false);
+                modelMap.put("errMsg","没有查到设备");
+            }
+
+        }
+
+
+        return modelMap;
+    }
 
 
     /**
